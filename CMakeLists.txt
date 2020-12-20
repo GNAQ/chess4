@@ -9,7 +9,8 @@ set(PROJECT_BINARY_DIR "./bin")
 set(PROJECT_SOURCE_DIR "./src")
 set(PROJECT_CONFIG_DIR "./config")
 
-
 aux_source_directory(./src SRCS)
+
+set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR})
 
 add_executable(chess4 ${SRCS})

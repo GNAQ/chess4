@@ -12,16 +12,6 @@
 
 Let's Go!
 
-## Daily Logs
-
-### 12/21
-
-初始化 git repo。初始化 `CMakeLists`
-
-第一行 `Hello World`
-
-创建 github repo。编写本 readme 并上传 remote。
-
 ## Flags
 
 ### 
@@ -30,6 +20,18 @@ Let's Go!
 
 第一次完整使用 CMake、git 等成熟开发工具和 C 语言的 little attampt~
 
-四子棋其实是受了一个视频的启发（Switch 上有这款游戏）
+四子棋其实是受了一个视频的启发（Switch 上有这款游戏）。
 
 希望慢慢进步吧……
+
+## Daily Logs
+
+### 12/21
+
+初始化 git repo。初始化 `CMakeLists`。
+
+第一行 `Hello World`。
+
+创建 github repo。编写本 readme 并上传 remote。
+
+添加 gitignore。
