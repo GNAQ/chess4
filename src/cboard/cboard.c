@@ -47,6 +47,7 @@ CreateResult Create_chessboard(int height, int width, char *usrA, char *usrB, in
 	return result;
 }
 
+// REVIEW
 int Finish(Board *bd)
 {
 	int i, j, h, w, ii, jj;
@@ -103,4 +104,9 @@ int Finish(Board *bd)
 			}
 	
 	return 0;
+}
+
+void Add_beam(Board *bd, int xpos, int color)
+{
+	// TODO
 }

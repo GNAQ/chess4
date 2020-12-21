@@ -49,7 +49,7 @@ void Add_beam(Board *bd, int xpos, int color);
 // 判断是否结棋
 int Finish(Board *bd);
 
-// 悔棋
+// TODO 悔棋 
 void Rollback(Board *bd);
 
-// 查看对弈历史是 CLI 该做的事情。
+// **查看对弈历史是 CLI 该做的事情。**
