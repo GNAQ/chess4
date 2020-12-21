@@ -5,6 +5,7 @@
 
 #include "cboard/cboard.h"
 #include "natsu/natsu.h"
+#include "cli/cli.h"
 
 void Show_Rules()
 {
@@ -14,7 +15,7 @@ void Show_Rules()
 	
 	puts("按 [1] 返回上个页面。");
 	
-	// Get_single_key_input("1");
+	Get_single_key_input("1");
 	return;
 }
 
@@ -28,23 +29,7 @@ void Show_Welcome_Info()
 	puts("----------------------------");
 	// TODO 账户模块的初始入口
 	// Get_Account_Info();
-	
-	/*
-	int keyid = Get_single_key_input("012");
-	switch (keyid)
-	{
-	case 0:
-		Show_Rules();
-		break;
-	case 1:
-		
-		break;
-	case 2:
-		
-		break;
-	default:
-		break;
-	} */
+	return;
 }
 
 // 初始的欢迎页面
@@ -53,18 +38,16 @@ void Welcome()
 	fnt:
 	Show_Welcome_Info();
 	
-	char inp = 0;
-	while (inp != '0' && inp != '1' && inp != '2')
-		inp=getchar();
-	switch(inp)
+	int keyid = Get_single_key_input("012");
+	switch (keyid)
 	{
-		case '0':
+		case 0:
 			Show_Rules();
 			goto fnt; // 我偏要用 goto。
-		case '1':
+		case 1:
 			
 			break;
-		case '2':
+		case 2:
 			
 			break;
 	}
@@ -72,18 +55,22 @@ void Welcome()
 
 void Lib_check()
 {
-	// HelloNatsu();
+	printf("------------Library Check Starts------------\n");
+	HelloNatsu();
 	HelloCBoard();
+	HelloCli();
+	system("cls");
 }
 
 int main()
 {
-	// Change_window_size(150,50);
-	// Welcome();
+	Change_window_size(150,50);
+	
 	Lib_check();
 	
+	Welcome();
 	
-	system("cls");
+	
 	puts("TESTS END HERE");
 	system("pause");
 	

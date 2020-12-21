@@ -10,17 +10,13 @@ set(PROJECT_SOURCE_DIR "./src")
 set(PROJECT_CONFIG_DIR "./config")
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR})
 
+set(LIB_LINK_DIR "./src/cboard ./src/cli")
 
-# add_subdirectory(./src/cli)
-link_directories(./src/cboard)
+link_directories(${LIB_LINK_DIR})
+add_subdirectory(./src/cli)
 add_subdirectory(./src/cboard)
-
-# add_library(natsu STATIC IMPORTED)
-# set_property(TARGET natsu PROPERTY IMPORTED_LOCATION ./src/natsu/libnatsu.a)
 
 aux_source_directory(./src SRCS)
 add_executable(chess4 ${SRCS})
 
-# link_libraries(chess4 cboard)
-# target_link_libraries(chess4 cboard natsu)
-target_link_libraries(chess4 cboard)
+target_link_libraries(chess4 cboard cli)
