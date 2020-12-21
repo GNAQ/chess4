@@ -3,6 +3,8 @@
 #include <math.h>
 #include <windows.h>
 
+#include "natsu/natsu.h"
+
 void Show_Rules()
 {
 	system("cls");
@@ -42,7 +44,7 @@ void Welcome()
 	{
 		case '0':
 			Show_Rules();
-			goto fnt;
+			goto fnt; // ÎÒÆ«ÒªÓÃ goto¡£
 		case '1':
 			
 			break;
@@ -64,7 +66,7 @@ void Change_Window_Size(int height, int width)
 int main()
 {
 	Change_Window_Size(150,50);
-	Welcome();
+	// Welcome();
 	
 	system("cls");
 	puts("TESTS END HERE");

@@ -8,9 +8,12 @@ project(chess4)
 set(PROJECT_BINARY_DIR "./bin")
 set(PROJECT_SOURCE_DIR "./src")
 set(PROJECT_CONFIG_DIR "./config")
+set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR})
+
+add_subdirectory(./src/natsu)
 
 aux_source_directory(./src SRCS)
 
-set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR})
-
 add_executable(chess4 ${SRCS})
+
+target_link_libraries(chess4 natsu)
