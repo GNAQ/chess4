@@ -12,3 +12,6 @@
 // 如果传入 _ 代表一个通配符，匹配除其余指明字符外的所有字符。
 int Get_single_key_input(char *req);
 
+void Change_window_size(int height, int width);
+
+void HelloNatsu();

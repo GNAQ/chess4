@@ -3,8 +3,8 @@ CMakeFiles
 cmake_install.cmake
 CMakeCache.txt
 Makefile
-src/natsu/CMakeFiles
-src/natsu/cmake_install.cmake
-src/natsu/Makefile
-src/natsu/libnatsu.a
-src/natsu/CMakeCache.txt
+src/*/CMakeFiles
+src/*/cmake_install.cmake
+src/*/Makefile
+src/*/lib*.a
+src/*/CMakeCache.txt

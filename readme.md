@@ -59,3 +59,52 @@ Let's Go!
 -
 
 开始写 Natsu 库。
+
+[15:07]
+
+Natsu 作为胶水库会被多方调用，目录关系还是同层的，现在 CMake 开始玩我了。
+
+试试把 natsu 单独分离出来编译行不行。
+
+[15:14]
+
+开始魔改……
+
+[15:38] 
+
+ld 一直报错 ` undefined reference to 'Get_single_key_input'`，搞不明白。
+
+[16:08]
+
+生命在于折腾。。。
+终于搞明白了
+
+翻了一篇奇怪的博客 ([URL Here](https://www.cnblogs.com/oldBook/archive/2004/01/13/11884212.html))
+
+他说要加这三行
+
+```plain
+add_library(natsu STATIC IMPORTED)
+set_property(TARGET natsu PROPERTY IMPORTED_LOCATION ./src/natsu/libnatsu.a)
+target_link_libraries(chess4 natsu)
+```
+
+然后就行了……我也不知道为什么……
+
+[16:15]
+
+现在又不行了。现在是 `add_subdirectory` 的 CBoard 出问题了
+
+md, 怎么回事
+
+[16:28]
+
+瞎整了一顿，现在差不多了。
+
+现在最关键的问题是
+
+[16:30]
+
+得了，没有最关键的问题了，好像都搞定了。
+
+`add_subdirectory()` 一定程度上真是好文明（共享变量方面）

@@ -3,6 +3,7 @@
 #include <math.h>
 #include <windows.h>
 
+#include "cboard/cboard.h"
 #include "natsu/natsu.h"
 
 void Show_Rules()
@@ -12,10 +13,8 @@ void Show_Rules()
 	puts("那么长，谁写啊，反正我不想写了。");
 	
 	puts("按 [1] 返回上个页面。");
-	// TODO 把这个东西做成非阻塞式的，专门开个库写好，可以传入期待字符的字符集（以字符串的形式），回传编号
-	char inp = 0;
-	while (inp != '1') 
-		inp = getchar();
+	
+	// Get_single_key_input("1");
 	return;
 }
 
@@ -29,6 +28,23 @@ void Show_Welcome_Info()
 	puts("----------------------------");
 	// TODO 账户模块的初始入口
 	// Get_Account_Info();
+	
+	/*
+	int keyid = Get_single_key_input("012");
+	switch (keyid)
+	{
+	case 0:
+		Show_Rules();
+		break;
+	case 1:
+		
+		break;
+	case 2:
+		
+		break;
+	default:
+		break;
+	} */
 }
 
 // 初始的欢迎页面
@@ -54,19 +70,18 @@ void Welcome()
 	}
 }
 
-// 改变窗口大小 h by w
-void Change_Window_Size(int height, int width)
+void Lib_check()
 {
-	char commands[30];
-	sprintf(commands, "mode con cols=%d lines=%d", height, width);
-	system(commands);
-	return;
+	// HelloNatsu();
+	HelloCBoard();
 }
 
 int main()
 {
-	Change_Window_Size(150,50);
+	// Change_window_size(150,50);
 	// Welcome();
+	Lib_check();
+	
 	
 	system("cls");
 	puts("TESTS END HERE");
