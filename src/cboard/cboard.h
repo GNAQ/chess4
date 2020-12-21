@@ -10,10 +10,23 @@
 
 void HelloCBoard();
 
+struct _HistoryA
+{
+	// TODO
+};
+typedef struct _HistoryA HisA;
+
 struct _Board
 {
+	// 盘面
 	int **mat;
 	int height, width;
+	// 对弈
+	char *userA, *userB; // 用户名
+	int idA, idB; // 用户 Hash
+	int winner; // .. 0 / 1 / 2 / -1[平局]
+	// 历史
+	// TODO
 };
 typedef struct _Board Board;
 
@@ -28,4 +41,15 @@ struct _CreateResult
 typedef struct _CreateResult CreateResult;
 
 // 创建一个棋盘 h by w
-CreateResult Create_chessboard(int height, int width);
+CreateResult Create_chessboard(int height, int width, char *usrA, char *usrB, int idA, int idB);
+
+// 添加一个子
+void Add_beam(Board *bd, int xpos, int color);
+
+// 判断是否结棋
+int Finish(Board *bd);
+
+// 悔棋
+void Rollback(Board *bd);
+
+// 查看对弈历史是 CLI 该做的事情。
