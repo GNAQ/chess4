@@ -8,42 +8,50 @@ void HelloCBoard()
 	return;
 }
 
-CreateResult Create_chessboard(int height, int width, char *usrA, char *usrB, int idA, int idB)
+CreateResult* Create_chessboard(int height, int width, char *usrA, char *usrB, int idA, int idB)
 {
 	int i, j, ii, jj;
-	CreateResult result;
+	CreateResult *result = calloc(1, sizeof(CreateResult));
 	
-	result.bd.height = height;
-	result.bd.width = width;
-	result.bd.mat = calloc(height + 2, sizeof(int *));
+	result->bd.height = height;
+	result->bd.width = width;
+	result->bd.mat = calloc(height + 2, sizeof(int *));
 	
-	if (result.bd.mat == NULL)
+	if (result->bd.mat == NULL)
 	{
-		result.result = -1;
+		result->result = -1;
 		return result;
 	}
 	
 	for (i = 0; i <= height; i++)
 	{
-		result.bd.mat[i] = calloc(width + 2, sizeof(int));
-		if (result.bd.mat[i] == NULL)
+		result->bd.mat[i] = calloc(width + 2, sizeof(int));
+		if (result->bd.mat[i] == NULL)
 		{
-			result.result = -1;
+			result->result = -1;
 			return result;
 		}
 	}
 	
+	result->bd.userA = calloc(9, sizeof(char));
+	result->bd.userB = calloc(9, sizeof(char));
+	if (result->bd.userA == NULL || result->bd.userB == NULL)
+	{
+		result->result = -1;
+		return result;
+	}
+	
 	for (i = 0; i <= height; i++)
 		for (j = 0; j <= width; j++)
-			result.bd.mat[i][j] = 0;
-	strcpy(result.bd.userA, usrA);
-	strcpy(result.bd.userB, usrB);
-	result.bd.idA = idA;
-	result.bd.idB = idB;
-	result.bd.winner = 0;
+			result->bd.mat[i][j] = 0;
 	
+	strcpy(result->bd.userA, usrA);
+	strcpy(result->bd.userB, usrB);
+	result->bd.idA = idA;
+	result->bd.idB = idB;
+	result->bd.winner = 0;
 	
-	result.result = 1;
+	result->result = 1;
 	return result;
 }
 
@@ -106,7 +114,15 @@ int Finish(Board *bd)
 	return 0;
 }
 
-void Add_beam(Board *bd, int xpos, int color)
+int Add_beam(Board *bd, int xpos, int color)
 {
-	// TODO
+	if (bd->mat[1][xpos] != 0)
+		return -1;
+	
+	int ypos = bd->height;
+	while (bd->mat[ypos][xpos] != 0)
+		ypos--;
+	
+	bd->mat[ypos][xpos] = color;
+	return 1;
 }

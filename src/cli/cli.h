@@ -7,3 +7,10 @@
 #include "../natsu/natsu.h"
 
 void HelloCli();
+
+void Show_rules();
+
+void Start_2p_game();
+
+void Show_board(Board *bd);
+// void Show_board(Board *bd, Account *ids, HisA *his);
