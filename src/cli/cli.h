@@ -12,4 +12,6 @@ void Show_rules();
 
 void Show_board(Board *bd, int cursorpos, int goer);
 
-void Show_hisA(HisA* his);
+void Show_hisA(Board* bd, HisA *his, int cnt_pos);
+
+int Show_his_list(int sel);

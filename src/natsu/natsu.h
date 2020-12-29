@@ -83,5 +83,7 @@ FileLL* Add_filell(FileLL *last, FILE *addfp);
 FileLL* Init_filell(void);
 
 FileLL* Resolute_logtree(FileLL* head);
+
+void Destroy_filelog(FileLL *head);
 // TODO
-void Read_his(FileLL* logid, HisA *his);
+void Read_his(FileLL *logid, HisA *his);

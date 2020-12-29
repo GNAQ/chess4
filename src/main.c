@@ -124,9 +124,90 @@ void Create_2p_game()
 	else goto game_2p_start;
 }
 
-void Look_up_his()
+void Look_up_his(FileLL* logid)
 {
-	// TODO
+	system("cls");
+	CreateHisA *reshis = Create_HisA(0);
+	
+	if (reshis->result != 1)
+	{
+		puts("创建历史记录对象时遇到错误，程序退出！");
+		system("pause");
+		exit(6);
+	}
+	
+	Read_his(logid, &(reshis->his));
+	HisA *hhis = &(reshis->his);
+	
+	CreateResult *res = Create_chessboard(hhis->height, hhis->width, 
+		hhis->userA, hhis->userB, 101, 102);
+	
+	if (res->result != 1)
+	{
+		puts("创建棋盘时遇到错误，程序退出！");
+		system("pause");
+		exit(1);
+	}
+	
+	int call_back, cnt_pos = 1;
+	while (1)
+	{
+		Show_hisA(&(res->bd), hhis, cnt_pos);
+		call_back = Get_single_key_input("jkq");
+		
+		switch (call_back)
+		{
+		case 0:
+			if (cnt_pos > 1)
+				cnt_pos--;
+			break;
+		case 1:
+			if (cnt_pos < hhis->tot_steps)
+				cnt_pos++;
+			break;
+		case 2:
+			goto Look_up_his_end;
+		}
+	}
+	Look_up_his_end:
+	return;
+}
+
+void Look_up_his_list()
+{
+	FileLL *head = Init_filell();
+	Resolute_logtree(head);
+	
+	int call_back, sel = 1, log_num, i;
+	while (1)
+	{
+		log_num = Show_his_list(sel);
+		
+		call_back = Get_single_key_input("jkb");
+		switch (call_back)
+		{
+		case 0:
+			if (sel > 1)
+			{
+				sel--;
+				head = head->prev;
+			}
+			break;
+		case 1:
+			if (sel < log_num)
+			{
+				sel++;
+				head = head->next;
+			}
+			break;
+		case 2:
+			goto lklist_sel_end;
+		}
+	}
+	lklist_sel_end:
+	
+	Look_up_his(head);
+	return;
 }
 
 // 初始的欢迎页面

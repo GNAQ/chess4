@@ -84,6 +84,11 @@ FileLL* Add_filell(FileLL *last, FILE* addfp)
 void Save_his(HisA* his)
 {
 	FILE *fplist = fopen("Histories/HList.txt","a");
+	if (fplist == NULL)
+	{
+		puts("文件不存在！程序退出。");
+		system("pause"); exit(4);
+	}
 	fprintf(fplist, "log_%lld.c4log\n", his->std_fmt_time);
 	fclose(fplist);
 	
@@ -93,7 +98,7 @@ void Save_his(HisA* his)
 	FILE *fphis = fopen(fname, "w");
 	if (fphis == NULL)
 	{
-		puts("文件系统错误！程序退出。\n");
+		puts("文件不存在！程序退出。");
 		system("pause");
 		exit(4);
 	}
@@ -130,7 +135,32 @@ FileLL* Init_filell(void)
 	return ret;
 }
 
+void Read_his(FileLL *logid, HisA *his)
+{
+	int i, j;
+	fscanf(logid->fp, "%lld%d%d%d%d%d%d", 
+		&(his->std_fmt_time), &(his->game_time->tm_year), &(his->game_time->tm_mon),
+		&(his->game_time->tm_mday), &(his->game_time->tm_hour), &(his->game_time->tm_min),
+		&(his->game_time->tm_sec));
+	his->game_time->tm_year -= 1900;
+	his->game_time->tm_mon -= 1;
+	fscanf(logid->fp, "%s%s", his->userA, his->userB);
+	fscanf(logid->fp, "%d%d%d%d",
+		&(his->height), &(his->width), &(his->winner), &(his->tot_steps));
+	j = his->tot_steps;
+	for (i = 1; i <= j; i++)
+		fscanf(logid->fp, "%d%d", &(his->posx[i]), &(his->posy[i]));
+	return;
+}
+
 FileLL* Resolute_filelog(FileLL *head)
 {
 	
+}
+
+void Destroy_filelog(FileLL *head)
+{
+	if (head->next != NULL) Destroy_filelog(head->next);
+	free(head);
+	return;
 }
