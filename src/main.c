@@ -65,14 +65,14 @@ void Create_2p_game()
 	while (w < 5 || w > 22)
 	{
 		printf("输入不合法！\n棋盘宽度：");
-		scanf("%d", &w);
+		ReadInt(&w);
 	}
 	printf("棋盘高度：");
 	scanf("%d", &h);
 	while (h < 5 || h > 22)
 	{
 		printf("输入不合法！\n棋盘高度：");
-		scanf("%d", &h);
+		ReadInt(&h);
 	}
 	
 	CreateResult *res;
@@ -96,10 +96,20 @@ void Create_2p_game()
 		cursorpos = Hold_round(&(res->bd), cursorpos, goer);
 		
 		win_status = Finish(&(res->bd));
+		if (res->bd.his->tot_steps == res->bd.height * res->bd.width)
+		{
+			win_status = -1;
+			break;
+		}
 	}
 	
 	Show_board(&(res->bd), cursorpos, goer);
-	printf("游戏结束！胜者是 %s", (goer == 1) ? res->bd.userA : res->bd.userB);
+	if (win_status == -1)
+		printf("游戏结束！平局。\n");
+	else
+		printf("游戏结束！胜者是 %s", (goer == 1) ? res->bd.userA : res->bd.userB);
+	
+	res->bd.his->winner = win_status;
 	
 	puts("您要保存本次对局的历史记录吗？按 [Y] 保存，按 [N] 不保存。");
 	call_back = Get_single_key_input("yn");
@@ -112,6 +122,11 @@ void Create_2p_game()
 	call_back = Get_single_key_input("14");
 	if (call_back == 0) return;
 	else goto game_2p_start;
+}
+
+void Look_up_his()
+{
+	// TODO
 }
 
 // 初始的欢迎页面

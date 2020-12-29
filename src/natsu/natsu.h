@@ -60,6 +60,9 @@ typedef struct _FileLL FileLL;
 
 // 函数
 
+// 手写的读 int
+void ReadInt(int *x);
+
 // 阻塞式等待键盘输入字符，即时响应
 // 并匹配 req 中的字符
 // 匹配成功则返回其在 req 中的下标，从 0 开始
@@ -79,4 +82,6 @@ FileLL* Add_filell(FileLL *last, FILE *addfp);
 
 FileLL* Init_filell(void);
 
-FileLL* Resolute_filelog(FileLL* head);
+FileLL* Resolute_logtree(FileLL* head);
+// TODO
+void Read_his(FileLL* logid, HisA *his);

@@ -1,5 +1,21 @@
 #include "natsu.h"
 
+void ReadInt(int *x)
+{
+	(*x) = 0; int k = 1; char ch = 0;
+	while (ch < '0' || ch > '9') 
+	{ 
+		ch = getchar();
+		if (ch == '-') k = -1;
+	}
+	while (ch >= '0' && ch <= '9')
+	{
+		(*x) = (*x) * 10 + ch - '0';
+		ch = getchar();
+	}
+	(*x) *= k;
+}
+
 int Get_single_key_input(char *req)
 {
 	int reqlen = strlen(req);
@@ -114,7 +130,7 @@ FileLL* Init_filell(void)
 	return ret;
 }
 
-// FileLL* Resolute_filelog(FileLL *head)
-// {
+FileLL* Resolute_filelog(FileLL *head)
+{
 	
-// }
+}

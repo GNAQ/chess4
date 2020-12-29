@@ -85,3 +85,8 @@ void Show_board(Board *bd, int cursorpos, int goer) // ¡ð¡ñ
 	
 	return;
 }
+
+void Show_hisA(HisA *his)
+{
+	// TODO
+}
