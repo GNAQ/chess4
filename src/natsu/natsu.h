@@ -48,3 +48,5 @@ int Get_single_key_input(char *req);
 void Change_window_size(int height, int width);
 
 void HelloNatsu();
+
+void Create_2p_game();

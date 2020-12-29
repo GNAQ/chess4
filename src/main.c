@@ -58,7 +58,7 @@ void Test_shouboard()
 	res->bd.mat[7][1]=2;
 	res->bd.mat[1][3]=1;
 	
-	Show_board(&(res->bd));
+	Show_board(&(res->bd), 3, 2);
 	
 	printf("SHOW BOARD TEST END HERE!\n");
 	system("pause");
