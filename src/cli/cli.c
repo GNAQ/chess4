@@ -195,3 +195,14 @@ int Show_his_list(int sel)
 	printf("------------------------------\n");
 	return i;
 }
+
+void Show_Welcome_Info(void)
+{
+	system("cls");
+	puts("欢迎游玩四子棋");
+	puts("按 [1] 进入双人模式");
+	puts("按 [2] 查看对弈历史记录");
+	puts("按 [0] 查看游戏规则");
+	puts("----------------------------");
+	return;
+}

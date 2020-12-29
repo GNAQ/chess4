@@ -7,17 +7,6 @@
 #include "natsu/natsu.h"
 #include "cli/cli.h"
 
-void Show_Welcome_Info()
-{
-	system("cls");
-	puts("欢迎游玩四子棋");
-	puts("按 [1] 进入双人模式");
-	puts("按 [2] 查看对弈历史记录");
-	puts("按 [0] 查看游戏规则");
-	puts("----------------------------");
-	return;
-}
-
 int Hold_round(Board *bd, int cursorpos, int goer)
 {
 	int call_back = 0;
@@ -124,7 +113,6 @@ void Create_2p_game()
 	else goto game_2p_start;
 }
 
-// REVIEW
 void Look_up_his(FileLL* logid)
 {
 	system("cls");
@@ -151,6 +139,7 @@ void Look_up_his(FileLL* logid)
 	}
 	
 	int call_back, cnt_pos = 1;
+	Add_beam2(&(res->bd), hhis->posx[1], hhis->posy[1], 1);
 	while (1)
 	{
 		Show_hisA(&(res->bd), hhis, cnt_pos);
@@ -160,11 +149,18 @@ void Look_up_his(FileLL* logid)
 		{
 		case 0:
 			if (cnt_pos > 1)
+			{
+				Remove_beam(&(res->bd), hhis->posx[cnt_pos], hhis->posy[cnt_pos]);
 				cnt_pos--;
+			}
 			break;
 		case 1:
 			if (cnt_pos < hhis->tot_steps)
+			{
 				cnt_pos++;
+				Add_beam2(&(res->bd), hhis->posx[cnt_pos], 
+					hhis->posy[cnt_pos], (cnt_pos % 2) ? 1 : 2);
+			}
 			break;
 		case 2:
 			goto Look_up_his_end;
@@ -205,6 +201,11 @@ void Look_up_his_list()
 			}
 			break;
 		case 2:
+			if (head == NULL)
+			{
+				printf("历史记录解析错误！程序退出。\n");
+				system("pause"); exit(12);
+			}
 			Look_up_his(head);
 			goto lklist_sel_end;
 		case 3:
@@ -233,14 +234,12 @@ void Welcome()
 			goto fnt; // 我偏要用 goto。
 		case 1:
 			Create_2p_game();
-			break;
+			goto fnt;
 		case 2:
 			Look_up_his_list();
 			goto fnt;
 	}
 }
-
-// ANCHOR 下面是检查
 
 void Lib_check()
 {
@@ -256,11 +255,7 @@ int main()
 	Change_window_size(110,40);
 	Check_file_dir();
 	
-	Lib_check();
-	
 	Welcome();
 	
-	puts("TESTS END HERE");
-	system("pause");
 	return 0;
 }
