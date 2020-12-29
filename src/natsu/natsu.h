@@ -1,4 +1,5 @@
-// Natsu 是负责提供简便工具函数、协调各库、环境和 OS 的「胶水库」
+// Natsu 负责提供简便工具函数、协调各库、环境和 OS。
+// “胶水库”
 #pragma once
 
 #include <stdio.h>
@@ -59,7 +60,9 @@ struct _FileLL
 };
 typedef struct _FileLL FileLL;
 
-// 函数
+// 函数如下
+
+void HelloNatsu(void);
 
 // 手写的读 int
 void ReadInt(int *x);
@@ -70,21 +73,26 @@ void ReadInt(int *x);
 // 如果传入 _ 代表一个通配符，匹配除其余指明字符外的所有字符。
 int Get_single_key_input(char *req);
 
+// 改变命令行的窗口大小。
 void Change_window_size(int height, int width);
-
-void HelloNatsu(void);
 
 // 检查历史记录的目录结构.
 void Check_file_dir(void);
 
+// 保存历史记录到文件。
 void Save_his(HisA* his);
 
+// 链表的添加操作
 FileLL* Add_filell(FileLL *last, FILE *addfp);
 
+// 链表的初始化操作
 FileLL* Init_filell(void);
 
+// 解析文件树到链表
 FileLL* Resolute_logtree(FileLL* head);
 
+// 销毁链表和其内存
 void Destroy_filelog(FileLL *head);
 
+// 从文件读历史记录到 HisA 结构体。
 void Read_his(FileLL *logid, HisA *his);

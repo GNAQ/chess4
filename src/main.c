@@ -7,6 +7,34 @@
 #include "natsu/natsu.h"
 #include "cli/cli.h"
 
+// 行一步棋。
+int Hold_round(Board *bd, int cursorpos, int goer);
+
+// 创建一个双人游戏
+void Create_2p_game(void);
+
+// 查询一条历史记录
+void Look_up_his(FileLL* logid);
+
+// 在历史记录菜单中选择
+void Look_up_his_list(void);
+
+// 初始的欢迎页面
+void Welcome(void);
+
+// [测试代码] 检查各个库的链接情况
+void Lib_check(void);
+
+int main()
+{
+	Change_window_size(110,40);
+	Check_file_dir();
+	Welcome();
+	
+	return 0;
+}
+
+
 int Hold_round(Board *bd, int cursorpos, int goer)
 {
 	int call_back = 0;
@@ -33,7 +61,7 @@ int Hold_round(Board *bd, int cursorpos, int goer)
 	}
 }
 
-void Create_2p_game()
+void Create_2p_game(void)
 {
 	int w, h, i, j;
 	int cursorpos, goer;
@@ -170,7 +198,7 @@ void Look_up_his(FileLL* logid)
 	return;
 }
 
-void Look_up_his_list()
+void Look_up_his_list(void)
 {
 	FileLL *head = Init_filell();
 	Resolute_logtree(head);
@@ -220,8 +248,7 @@ void Look_up_his_list()
 	return;
 }
 
-// 初始的欢迎页面
-void Welcome()
+void Welcome(void)
 {
 	fnt:
 	Show_Welcome_Info();
@@ -241,21 +268,11 @@ void Welcome()
 	}
 }
 
-void Lib_check()
+void Lib_check(void)
 {
 	printf("------------Library Check Starts------------\n");
 	HelloNatsu();
 	HelloCBoard();
 	HelloCli();
 	system("cls");
-}
-
-int main()
-{
-	Change_window_size(110,40);
-	Check_file_dir();
-	
-	Welcome();
-	
-	return 0;
 }

@@ -9,10 +9,10 @@
 
 #include "../natsu/natsu.h"
 
-void HelloCli();
+void HelloCli(void);
 
 // 展示游戏规则
-void Show_rules();
+void Show_rules(void);
 
 // 展示对弈棋盘
 void Show_board(Board *bd, int cursorpos, int goer);
