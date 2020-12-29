@@ -13,9 +13,9 @@ void HelloCBoard();
 // 创建一个棋盘 h by w
 CreateResult* Create_chessboard(int height, int width, char *usrA, char *usrB, int idA, int idB);
 
-void Destroy_chessboard(Board *bd);
+void Destroy_chessboard(CreateResult *result);
 
-// 添加一个子 [1 成功 || -1 满格-失败]
+// 添加一个子 [1 成功 || 0 满格-失败]
 int Add_beam(Board *bd, int xpos, int color);
 
 // 判断是否结棋

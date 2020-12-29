@@ -117,7 +117,7 @@ int Finish(Board *bd)
 int Add_beam(Board *bd, int xpos, int color)
 {
 	if (bd->mat[1][xpos] != 0)
-		return -1;
+		return 0;
 	
 	int ypos = bd->height;
 	while (bd->mat[ypos][xpos] != 0)
@@ -125,4 +125,9 @@ int Add_beam(Board *bd, int xpos, int color)
 	
 	bd->mat[ypos][xpos] = color;
 	return 1;
+}
+
+void Destroy_chessboard(CreateResult *result)
+{
+	// TODO
 }

@@ -37,3 +37,4 @@ void HelloNatsu()
 	system("pause");
 	return;
 }
+
