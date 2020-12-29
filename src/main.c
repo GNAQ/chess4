@@ -46,7 +46,6 @@ int Hold_round(Board *bd, int cursorpos, int goer)
 
 void Create_2p_game()
 {
-	
 	int w, h, i, j;
 	int cursorpos, goer;
 	int win_status;
@@ -102,6 +101,11 @@ void Create_2p_game()
 	Show_board(&(res->bd), cursorpos, goer);
 	printf("游戏结束！胜者是 %s", (goer == 1) ? res->bd.userA : res->bd.userB);
 	
+	puts("您要保存本次对局的历史记录吗？按 [Y] 保存，按 [N] 不保存。");
+	call_back = Get_single_key_input("yn");
+	if (call_back == 0)
+		Save_his(res->bd.his);
+	
 	Destroy_chessboard(res);
 	
 	puts("按 [1] 退出。按 [4] 再来一局。");
@@ -145,6 +149,7 @@ void Lib_check()
 int main()
 {
 	Change_window_size(110,40);
+	Check_file_dir();
 	
 	Lib_check();
 	

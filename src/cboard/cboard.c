@@ -30,6 +30,8 @@ CreateResult* Create_chessboard(int height, int width, char *usrA, char *usrB, i
 	
 	result->bd.height = height;
 	result->bd.width = width;
+	result->bd.his->height = height;
+	result->bd.his->width = width;
 	result->bd.mat = calloc(height + 2, sizeof(int *));
 	
 	if (result->bd.mat == NULL)
@@ -48,8 +50,8 @@ CreateResult* Create_chessboard(int height, int width, char *usrA, char *usrB, i
 		}
 	}
 	
-	result->bd.userA = calloc(9, sizeof(char));
-	result->bd.userB = calloc(9, sizeof(char));
+	result->bd.userA = calloc(10, sizeof(char));
+	result->bd.userB = calloc(10, sizeof(char));
 	if (result->bd.userA == NULL || result->bd.userB == NULL)
 	{
 		result->result = -1;
@@ -61,7 +63,9 @@ CreateResult* Create_chessboard(int height, int width, char *usrA, char *usrB, i
 			result->bd.mat[i][j] = 0;
 	
 	strcpy(result->bd.userA, usrA);
+	strcpy(result->bd.his->userA, usrA);
 	strcpy(result->bd.userB, usrB);
+	strcpy(result->bd.his->userB, usrB);
 	result->bd.idA = idA;
 	result->bd.idB = idB;
 	result->bd.winner = 0;
@@ -104,8 +108,8 @@ int Finish(Board *bd)
 						ok = 0;
 				if (ok == 1) 
 				{
-					his->winner = ma[i][j];
-					return ma[i][j];
+					his->winner = ma[j][i];
+					return ma[j][i];
 				}
 			}
 	// ////
@@ -192,6 +196,7 @@ CreateHisA* Create_HisA(int write_cur_time)
 		time_t std_format_time;
 		time(&std_format_time);
 		ret->his.game_time = gmtime(&std_format_time);
+		ret->his.std_fmt_time = std_format_time;
 	}
 	
 	ret->his.userA = calloc(10, sizeof(char));
@@ -210,6 +215,9 @@ CreateHisA* Create_HisA(int write_cur_time)
 		ret->result = -1;
 		return ret;
 	}
+	
+	ret->his.tot_steps = 0;
+	ret->his.winner = 0;
 	
 	ret->result = 1;
 	return ret;

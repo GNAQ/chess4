@@ -14,10 +14,11 @@ typedef struct tm __Sys_time;
 struct _HistoryA
 {
 	int winner;
-	int tot_steps;
+	int tot_steps, height, width;
 	int *posx, *posy;
 	char *userA, *userB;
 	__Sys_time *game_time;
+	time_t std_fmt_time;
 };
 typedef struct _HistoryA HisA;
 // 盘面
@@ -49,6 +50,13 @@ struct _CreateHisA
 	HisA his;
 };
 typedef struct _CreateHisA CreateHisA;
+// 文件链表
+struct _FileLL
+{
+	FILE *fp;
+	struct _FileLL *prev, *next;
+};
+typedef struct _FileLL FileLL;
 
 // 函数
 
@@ -60,4 +68,15 @@ int Get_single_key_input(char *req);
 
 void Change_window_size(int height, int width);
 
-void HelloNatsu();
+void HelloNatsu(void);
+
+// 检查历史记录的目录结构.
+void Check_file_dir(void);
+
+void Save_his(HisA* his);
+
+FileLL* Add_filell(FileLL *last, FILE *addfp);
+
+FileLL* Init_filell(void);
+
+FileLL* Resolute_filelog(FileLL* head);
