@@ -28,13 +28,13 @@ Let's Go!
 
 计划了两个库
 
-一个是账号库，记录对战数据，提供注册功能和登入功能，数据库用加密存储。
+~~一个是账号库，记录对战数据，提供注册功能和登入功能，数据库用加密存储。~~
 
-为此我估计还得写个简易数据库出来。不过这个不难做。
+~~为此我估计还得写个简易数据库出来。不过这个不难做。~~
 
-字符串加密手段还没想好。账号密码就只支持可见 ASCII 字符集的常用子集算了。
+~~字符串加密手段还没想好。账号密码就只支持可见 ASCII 字符集的常用子集算了。~~
 
-上述这些都丢到一个库里。
+~~上述这些都丢到一个库里。~~ 做不完了，砍了。
 
 ~~一个是专门处理各种零碎功能的库。~~
 
@@ -43,6 +43,18 @@ Let's Go!
 ~~这样就来一个函数专门处理他。具体写在代码注释里了。~~
 
 今晚我就写完 `CBoard` 棋盘处理。 
+
+### 2020/12/29
+
+虽然账号系统没了，但是历史记录还是要有！还得来一个历史记录查看器。
+
+详细规划一下，大概是这样的。
+
+有一个文件夹里面存每次历史记录（单独一个文件）
+
+然后文件夹同级下有一个清单。
+
+然后写几个函数，就这样。
 
 -----------------
 
@@ -64,7 +76,7 @@ Let's Go!
 
 > [15:07]
 > 
-> Natsu 作为胶水库会被多方调用，目录关系还是同层的，现> 在 CMake 开始玩我了。
+> Natsu 作为胶水库会被多方调用，目录关系还是同层的，现在 CMake 开始玩我了。
 > 
 > 试试把 natsu 单独分离出来编译行不行。
 > 
@@ -74,20 +86,20 @@ Let's Go!
 > 
 > [15:38] 
 > 
-> ld 一直报错 ` undefined reference to > 'Get_single_key_input'`，搞不明白。
+> ld 一直报错 ` undefined reference to 'Get_single_key_input'`，搞不明白。
 > 
 > [16:08]
 > 
 > 生命在于折腾。。。
 > 终于搞明白了
 > 
-> 翻了一篇奇怪的博客 ([URL Here](https://www.> cnblogs.com/oldBook/archive/2004/01/13/> 11884212.html))
+> 翻了一篇奇怪的博客 ([URL Here](https://www.cnblogs.com/oldBook/archive/2004/01/13/> 11884212.html))
 > 
 > 他说要加这三行
 > 
 > ```plain
 > add_library(natsu STATIC IMPORTED)
-> set_property(TARGET natsu PROPERTY > IMPORTED_LOCATION ./src/natsu/libnatsu.a)
+> set_property(TARGET natsu PROPERTY IMPORTED_LOCATION ./src/natsu/libnatsu.a)
 > target_link_libraries(chess4 natsu)
 > ```
 > 
@@ -95,7 +107,7 @@ Let's Go!
 > 
 > [16:15]
 > 
-> 现在又不行了。现在是 `add_subdirectory` 的 CBoard > 出问题了
+> 现在又不行了。现在是 `add_subdirectory` 的 `CBoard` 出问题了
 > 
 > md, 怎么回事
 > 
@@ -109,7 +121,7 @@ Let's Go!
 > 
 > 得了，没有最关键的问题了，好像都搞定了。
 > 
-> `add_subdirectory()` 一定程度上真是好文明（共享变量> 方面）
+> `add_subdirectory()` 一定程度上真是好文明（共享变量方面）
 > 
 > [16:35]
 > 
@@ -184,3 +196,5 @@ Let's Go!
 > [18:52]
 
 修好了，yeah。
+
+添加了结束刷新和光标标识。

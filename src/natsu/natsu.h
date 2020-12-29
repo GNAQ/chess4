@@ -6,12 +6,18 @@
 #include <math.h>
 #include <windows.h>
 #include <conio.h>
+#include <time.h>
 
+typedef struct tm __Sys_time;
 // 棋盘类 struct 声明
 // 历史记录
 struct _HistoryA
 {
-	// TODO
+	int winner;
+	int tot_steps;
+	int *posx, *posy;
+	char *userA, *userB;
+	__Sys_time *game_time;
 };
 typedef struct _HistoryA HisA;
 // 盘面
@@ -24,7 +30,7 @@ struct _Board
 	int idA, idB; // 用户 Hash
 	int winner; // .. 0 / 1 / 2 / -1[平局]
 	// 历史
-	// TODO
+	HisA *his;
 };
 typedef struct _Board Board;
 // 创建 CBoard 的结果
@@ -36,6 +42,13 @@ struct _CreateResult
 	Board bd;
 };
 typedef struct _CreateResult CreateResult;
+// 创建历史记录的结果
+struct _CreateHisA
+{
+	int result;
+	HisA his;
+};
+typedef struct _CreateHisA CreateHisA;
 
 // 函数
 

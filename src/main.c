@@ -12,7 +12,7 @@ void Show_Welcome_Info()
 	system("cls");
 	puts("欢迎游玩四子棋");
 	puts("按 [1] 进入双人模式");
-	puts("按 [2] 查看账号信息");
+	puts("按 [2] 查看对弈历史记录");
 	puts("按 [0] 查看游戏规则");
 	puts("----------------------------");
 	return;
@@ -57,7 +57,6 @@ void Create_2p_game()
 	w = h = -1;
 	cursorpos = 1; goer = 0;
 	win_status = 0;
-	// TODO 加账号选择
 	
 	system("cls");
 	puts("请您选定棋盘大小。最小宽高：5×5 最大宽高：22×22");
@@ -100,6 +99,7 @@ void Create_2p_game()
 		win_status = Finish(&(res->bd));
 	}
 	
+	Show_board(&(res->bd), cursorpos, goer);
 	printf("游戏结束！胜者是 %s", (goer == 1) ? res->bd.userA : res->bd.userB);
 	
 	Destroy_chessboard(res);
@@ -142,27 +142,9 @@ void Lib_check()
 	system("cls");
 }
 
-void Test_shouboard()
-{
-	CreateResult *res;
-	res = Create_chessboard(7, 7, "GNAQ", "dkw", 112, 113);
-	
-	res->bd.mat[4][4]=2;
-	res->bd.mat[6][5]=1;
-	res->bd.mat[7][1]=2;
-	res->bd.mat[1][3]=1;
-	
-	Show_board(&(res->bd), 3, 2);
-	
-	printf("SHOW BOARD TEST END HERE!\n");
-	system("pause");
-	system("cls");
-	return;
-}
-
 int main()
 {
-	Change_window_size(150,50);
+	Change_window_size(110,40);
 	
 	Lib_check();
 	

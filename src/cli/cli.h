@@ -11,4 +11,5 @@ void HelloCli();
 void Show_rules();
 
 void Show_board(Board *bd, int cursorpos, int goer);
-// void Show_board(Board *bd, Account *ids, HisA *his);
+
+void Show_hisA(HisA* his);

@@ -21,6 +21,8 @@ int Get_single_key_input(char *req)
 	return -1;
 }
 
+
+
 // 改变窗口大小 h by w
 void Change_window_size(int height, int width)
 {
@@ -37,4 +39,3 @@ void HelloNatsu()
 	system("pause");
 	return;
 }
-

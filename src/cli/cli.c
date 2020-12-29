@@ -22,11 +22,6 @@ void Show_rules()
 	return;
 }
 
-void Start_2p_game()
-{
-	// TODO
-}
-
 void Show_board(Board *bd, int cursorpos, int goer) // ○●
 {
 	system("cls");
@@ -45,9 +40,15 @@ void Show_board(Board *bd, int cursorpos, int goer) // ○●
 	}
 	printf("\n\n");
 	
-	for (i = 1; i <= bd->width + 1; i++)
-		printf("--");
-	putchar('\n');
+	putchar('-');
+	for (i = 1; i <= bd->width; i++)
+	{
+		if (i == cursorpos)
+			printf("▼");
+		else
+			printf("--");
+	}
+	printf("-\n");
 	for (i = 1; i <= bd->height; i++)
 	{
 		putchar('|');
@@ -68,15 +69,19 @@ void Show_board(Board *bd, int cursorpos, int goer) // ○●
 		}
 		putchar('|'); putchar('\n');
 	}
-	for (i = 1; i <= bd->width + 1; i++)
-		printf("--");
-	putchar('\n');
+	putchar('-');
+	for (i = 1; i <= bd->width; i++)
+	{
+		if (i == cursorpos)
+			printf("▲");
+		else
+			printf("--");
+	}
+	printf("-\n");
 	
 	printf("--------------------\n");
 	puts("按 [J] [K] 键切换落子位置向左/向右，按 [B] 键落子。");
 	printf("现在是 %s 落子。\n", (goer == 1) ? bd->userA : bd->userB);
 	
-	// TODO 显示账号信息和对弈信息
-	printf("----TODO----\n\n");
 	return;
 }
