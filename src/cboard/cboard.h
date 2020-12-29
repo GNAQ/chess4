@@ -26,5 +26,11 @@ void Destroy_HisA(HisA *his);
 // 添加一个子 [1 成功 || 0 满格-失败]
 int Add_beam(Board *bd, int xpos, int color);
 
+// 移除一个子
+void Removo_beam(Board *bd, int xpos);
+
+// HisView 专用 - 添加一个子
+void Add_beam2(Board *bd, int xpos, int color);
+
 // 判断是否结棋
 int Finish(Board *bd);

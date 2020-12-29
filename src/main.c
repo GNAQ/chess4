@@ -124,6 +124,7 @@ void Create_2p_game()
 	else goto game_2p_start;
 }
 
+// REVIEW
 void Look_up_his(FileLL* logid)
 {
 	system("cls");
@@ -177,13 +178,16 @@ void Look_up_his_list()
 {
 	FileLL *head = Init_filell();
 	Resolute_logtree(head);
+	head = head->next;
+	
+	char str[100];
 	
 	int call_back, sel = 1, log_num, i;
 	while (1)
 	{
 		log_num = Show_his_list(sel);
 		
-		call_back = Get_single_key_input("jkb");
+		call_back = Get_single_key_input("jkbq");
 		switch (call_back)
 		{
 		case 0:
@@ -201,12 +205,17 @@ void Look_up_his_list()
 			}
 			break;
 		case 2:
+			Look_up_his(head);
+			goto lklist_sel_end;
+		case 3:
 			goto lklist_sel_end;
 		}
 	}
-	lklist_sel_end:
 	
-	Look_up_his(head);
+	lklist_sel_end:
+	while (head->prev != NULL) 
+		head = head->prev;
+	Destroy_filelog(head);
 	return;
 }
 
@@ -226,8 +235,8 @@ void Welcome()
 			Create_2p_game();
 			break;
 		case 2:
-			
-			break;
+			Look_up_his_list();
+			goto fnt;
 	}
 }
 

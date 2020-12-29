@@ -231,3 +231,21 @@ void Destroy_HisA(HisA *his)
 	free(his->userA);
 	return;
 }
+
+void Remove_beam(Board *bd, int xpos)
+{
+	int ypos = bd->height;
+	while (bd->mat[ypos][xpos] != 0)
+		ypos--;
+	bd->mat[ypos][xpos] = 0;
+	return;
+}
+
+void Add_beam2(Board *bd, int xpos, int color)
+{
+	int ypos = bd->height;
+	while (bd->mat[ypos][xpos] != 0)
+		ypos--;
+	bd->mat[ypos][xpos] = color;
+	return;
+}

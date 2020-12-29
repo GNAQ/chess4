@@ -86,7 +86,7 @@ void Show_board(Board *bd, int cursorpos, int goer) // ○●
 	return;
 }
 
-// REVIEW
+
 void Show_hisA(Board* bd, HisA *his, int cnt_pos)
 {
 	system("cls");
@@ -154,7 +154,6 @@ void Show_hisA(Board* bd, HisA *his, int cnt_pos)
 	return;
 }
 
-// REVIEW
 int Show_his_list(int sel)
 {
 	system("cls");
@@ -172,7 +171,7 @@ int Show_his_list(int sel)
 	}
 	
 	printf("------------------------------\n");
-	printf("| 选择历史记录：          |\n");
+	printf("|      选择历史记录：        |\n");
 	printf("------------------------------\n");
 	
 	while (fgets(str, 50, fplist) != NULL)
@@ -181,15 +180,18 @@ int Show_his_list(int sel)
 		sscanf(str, "log_%lld.c4log", &std_fmt_systm);
 		systm = gmtime(&std_fmt_systm);
 		
-		if (i == sel) printf("[当前选中]");
-		
-		printf("[A类记录] 游戏时间：%d/%d/%d %d:%d:%d (英国 0 时区)\n",
-			systm->tm_year + 1990, systm->tm_mon + 1, systm->tm_mday,
+		printf("[A类记录] 游戏时间：%d/%d/%d %02d:%02d:%02d (英国 0 时区)",
+			systm->tm_year + 1900, systm->tm_mon + 1, systm->tm_mday,
 			systm->tm_hour, systm->tm_min, systm->tm_sec);
-		printf("------------------------------\n");
+		
+		if (i == sel) 
+			printf("                 [当前选中]\n");
+		else 
+			printf("\n");
+		printf("----------------------------------------------------------\n");
 	}
 	
-	printf("\n\n按 [J] [K] 上/下选择。按 [B] 确定。\n");
+	printf("\n\n按 [J] [K] 上/下选择。按 [B] 确定。按 [Q] 退出。\n");
 	printf("------------------------------\n");
 	return i;
 }

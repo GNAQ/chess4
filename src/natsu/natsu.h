@@ -53,6 +53,7 @@ typedef struct _CreateHisA CreateHisA;
 // 文件链表
 struct _FileLL
 {
+	int id;
 	FILE *fp;
 	struct _FileLL *prev, *next;
 };
@@ -85,5 +86,5 @@ FileLL* Init_filell(void);
 FileLL* Resolute_logtree(FileLL* head);
 
 void Destroy_filelog(FileLL *head);
-// TODO
+
 void Read_his(FileLL *logid, HisA *his);

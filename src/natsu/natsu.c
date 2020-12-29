@@ -37,7 +37,7 @@ int Get_single_key_input(char *req)
 	return -1;
 }
 
-// æ”¹å˜çª—å£å¤§å° h by w
+// ¸Ä±ä´°¿Ú´óĞ¡ h by w
 void Change_window_size(int height, int width)
 {
 	char commands[30];
@@ -46,7 +46,7 @@ void Change_window_size(int height, int width)
 	return;
 }
 
-// è¾“å‡º Hello Natsu æµ‹è¯•
+// Êä³ö Hello Natsu ²âÊÔ
 void HelloNatsu(void)
 {
 	puts("Hello Natsu!");
@@ -63,13 +63,12 @@ void Check_file_dir(void)
 	return;
 }
 
-// REVIEW
 FileLL* Add_filell(FileLL *last, FILE* addfp)
 {
 	FileLL* add = calloc(1, sizeof(FileLL));
 	if (add == NULL)
 	{
-		puts("ç¨‹åºå†…å­˜ä¸è¶³ï¼å³å°†é€€å‡ºã€‚");
+		puts("³ÌĞòÄÚ´æ²»×ã£¡¼´½«ÍË³ö¡£");
 		system("pause");
 		exit(3);
 	}
@@ -78,6 +77,7 @@ FileLL* Add_filell(FileLL *last, FILE* addfp)
 	last->next = add;
 	add->next = NULL;
 	add->fp = addfp;
+	add->id = last->id + 1;
 	return add;
 }
 
@@ -86,7 +86,7 @@ void Save_his(HisA* his)
 	FILE *fplist = fopen("Histories/HList.txt","a");
 	if (fplist == NULL)
 	{
-		puts("æ–‡ä»¶ä¸å­˜åœ¨ï¼ç¨‹åºé€€å‡ºã€‚");
+		puts("ÎÄ¼ş²»´æÔÚ£¡³ÌĞòÍË³ö¡£");
 		system("pause"); exit(4);
 	}
 	fprintf(fplist, "log_%lld.c4log\n", his->std_fmt_time);
@@ -98,7 +98,7 @@ void Save_his(HisA* his)
 	FILE *fphis = fopen(fname, "w");
 	if (fphis == NULL)
 	{
-		puts("æ–‡ä»¶ä¸å­˜åœ¨ï¼ç¨‹åºé€€å‡ºã€‚");
+		puts("ÎÄ¼ş²»´æÔÚ£¡³ÌĞòÍË³ö¡£");
 		system("pause");
 		exit(4);
 	}
@@ -125,25 +125,26 @@ FileLL* Init_filell(void)
 	FileLL* ret = calloc(1, sizeof(FileLL));
 	if (ret == NULL)
 	{
-		puts("ç¨‹åºå†…å­˜ä¸è¶³ï¼å³å°†é€€å‡ºã€‚");
+		puts("³ÌĞòÄÚ´æ²»×ã£¡¼´½«ÍË³ö¡£");
 		system("pause");
 		exit(3);
 	}
 	
 	ret->next = ret->prev = NULL;
 	ret->fp = NULL;
+	ret->id = 1;
 	return ret;
 }
 
 void Read_his(FileLL *logid, HisA *his)
 {
-	int i, j;
+	int i, j, a1[6];
 	fscanf(logid->fp, "%lld%d%d%d%d%d%d", 
-		&(his->std_fmt_time), &(his->game_time->tm_year), &(his->game_time->tm_mon),
-		&(his->game_time->tm_mday), &(his->game_time->tm_hour), &(his->game_time->tm_min),
-		&(his->game_time->tm_sec));
-	his->game_time->tm_year -= 1900;
-	his->game_time->tm_mon -= 1;
+		&(his->std_fmt_time), &a1[0], &a1[1], &a1[2],
+		&a1[3], &a1[4], &a1[5]);
+	his->game_time = gmtime(&(his->std_fmt_time));
+	his->game_time->tm_year += 1900;
+	his->game_time->tm_mon += 1;
 	fscanf(logid->fp, "%s%s", his->userA, his->userB);
 	fscanf(logid->fp, "%d%d%d%d",
 		&(his->height), &(his->width), &(his->winner), &(his->tot_steps));
@@ -153,14 +154,42 @@ void Read_his(FileLL *logid, HisA *his)
 	return;
 }
 
-FileLL* Resolute_filelog(FileLL *head)
+FileLL* Resolute_logtree(FileLL *head)
 {
+	char str[50],fname[35];
+	int i = 0;
+	FILE *fplog = NULL;
+	FileLL *tail = head;
 	
+	FILE *fplist = fopen("Histories/HList.txt","r");
+	if (fplist == NULL)
+	{
+		puts("ÀúÊ·¼ÇÂ¼Ä¿Â¼ÎÄ¼ş¶ªÊ§£¬ÎŞ·¨½âÎöÀúÊ·¼ÇÂ¼£¡³ÌĞòÍË³ö¡£");
+		system("pause"); exit(4);
+	}
+	
+	while (fgets(str, 50, fplist) != NULL)
+	{
+		i++;
+		
+		strcpy(fname,"Histories/Logs/");
+		sscanf(str, " %s\n", fname + 15);
+		
+		fplog = fopen(fname,"r");
+		if (fplog == NULL)
+		{
+			puts("ÀúÊ·¼ÇÂ¼ÎÄ¼ş¶ªÊ§£¡³ÌĞòÍË³ö¡£");
+			system("pause"); exit(11);
+		}
+		tail = Add_filell(tail, fplog);
+	}
+	return head;
 }
 
 void Destroy_filelog(FileLL *head)
 {
 	if (head->next != NULL) Destroy_filelog(head->next);
+	fclose(head->fp);
 	free(head);
 	return;
 }
