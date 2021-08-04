@@ -1,4 +1,4 @@
-# C 语言实验课 - 四子棋
+# Lecture Lab - C Programming Language
 
 Author: GNAQ
 
